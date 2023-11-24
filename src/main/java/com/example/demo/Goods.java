@@ -2,7 +2,6 @@ package com.example.demo;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 
 @Entity
 public class Goods {
@@ -10,9 +9,9 @@ public class Goods {
     private String name;
     private String content;
     private String dep_city;
-    private LocalDate dep_date;
+    private String dep_date;
     private String arr_city;
-    private LocalDate arr_date;
+    private String arr_date;
 
     protected Goods() {
 
@@ -52,11 +51,11 @@ public class Goods {
         this.dep_city = dep_city;
     }
 
-    public LocalDate getDep_date() {
+    public String getDep_date() {
         return dep_date;
     }
 
-    public void setDep_date(LocalDate dep_date) {
+    public void setDep_date(String dep_date) {
         this.dep_date = dep_date;
     }
 
@@ -68,11 +67,11 @@ public class Goods {
         this.arr_city = arr_city;
     }
 
-    public LocalDate getArr_date() {
+    public String getArr_date() {
         return arr_date;
     }
 
-    public void setArr_date(LocalDate arr_date) {
+    public void setArr_date(String arr_date) {
         this.arr_date = arr_date;
     }
 
