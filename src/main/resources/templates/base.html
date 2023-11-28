@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Моя Система Учета Грузов{% endblock %}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .header {
+            background-color: #0C0032;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .header a {
+            color: white;
+            text-decoration: none;
+            padding: 0 15px;
+        }
+        .header a:hover {
+            text-decoration: underline;
+        }
+        /* Дополнительные стили */
+    </style>
+    {% block custom_styles %}{% endblock %}
+</head>
+<body>
+<div class="header">
+    <a href="/">Главная</a>
+    <a href="/investment-blog">Инвестиционный блог</a>
+    <!-- Другие ссылки при необходимости -->
+</div>
+
+<div class="content">
+    {% block content %}
+    <!-- Содержимое конкретной страницы будет здесь -->
+    {% endblock %}
+</div>
+
+{% block custom_scripts %}{% endblock %}
+</body>
+</html>

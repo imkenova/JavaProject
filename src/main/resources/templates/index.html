@@ -3,8 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Система работы с грузами</title>
+    <style>
+        body {
+            background-color: #2F2FA2; /* Изменен цвет фона */
+            color: white; /* Делаем текст на странице белым */
+            font-family: Arial, sans-serif; /* Базовый шрифт для страницы */
+        }
+        * {
+            font-family: inherit; /* Все элементы наследуют шрифт от своего родителя */
+            vertical-align: inherit; /* Все элементы наследуют вертикальное выравнивание */
+        }
+        /* Стиль навигационной панели */
+        .navbar {
+            background-color: #0C0032;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        /* Дополнительные стили */
+    </style>
 </head>
 <body>
+<div class="navbar">
+    <a href="#home">Главная</a>
+    <a href="/investment-blog">Инвестиционный блог</a>
+    <!-- Другие ссылки при необходимости -->
+</div>
+
 <blockquote class="blockquote text-center"><h1>Грузы</h1></blockquote>
 <div class="row" style="margin-left: 3%">
     <div class="col-md-8 offset-md-4">
@@ -30,7 +67,7 @@
         </thead>
         <tbody>
         <tr th:each="goods: ${listGoods}">
-            <th scope="row" class="text-white" th:text="${goods.id}">ID груза отстутсвует</th>
+            <th scope="row" class="text-white" th:text="${goods.id}">ID груза отсутствует</th>
             <th scope="row" class="text-white" th:text="${goods.name}">Название груза отсутствует</th>
             <th scope="row" class="text-white" th:text="${goods.content}">Содержимое груза отсутствует</th>
             <th scope="row" class="text-white" th:text="${goods.dep_city}">Город отправки отсутствует</th>
@@ -52,7 +89,6 @@
                 const count = tBody.querySelectorAll('tr').length;
                 document.write('Количество грузов в таблице: ' + count)
             }
-
             getRowsColumn()
         </script>
     </p>
