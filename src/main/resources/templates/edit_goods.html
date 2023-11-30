@@ -9,6 +9,7 @@
         nav.navbar {
             padding-left: 15px;
         }
+
         body {
             background-color: #acd5fa; /* Голубой цвет фона */
         }
@@ -38,45 +39,49 @@
         </div>
     </div>
 </nav>
-<blockquote class="blockquote text-center"><h2>Редактирование груза</h2></blockquote>
-<div class="col-md-8 center-block" style="margin-top: 1%">
-    <form action="#" th:action="@{/save}" th:object="${goods}" method="post">
-        <table class="table text-left">
-            <tr>
-                <td>ID груза:</td>
-                <td><input type="text" th:field="*{id}" readonly="readonly" class="form-control"></td>
-            </tr>
-            <tr>
-                <td>Название:</td>
-                <td><input type="text" th:field="*{name}" class="form-control"></td>
-            </tr>
-            <tr>
-                <td>Содержимое:</td>
-                <td><input type="text" th:field="*{content}" class="form-control"></td>
-            </tr>
-            <tr>
-                <td>Город отправки:</td>
-                <td><input type="text" th:field="*{dep_city}" class="form-control"></td>
-            </tr>
-            <tr>
-                <td>Дата отправки:</td>
-                <td><input type="date" name="dep_date" value="${goods.dep_date}" required th:field="*{dep_date}" class="form-control"></td>
-            </tr>
-            <tr>
-                <td>Город получения:</td>
-                <td><input type="text" th:field="*{arr_city}" class="form-control"></td>
-            </tr>
-            <tr>
-                <td>Дата получения:</td>
-                <td><input type="date" name="arr_date" value="${goods.arr_date}" required th:field="*{arr_date}" class="form-control"></td>
-            </tr>
-            <tr>
-                <td colspan="2" class="text-center">
-                    <button type="submit" class="btn btn-primary">Отправить</button>
-                </td>
-            </tr>
-        </table>
-    </form>
+<div class="container" style="margin-top: 2rem;">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <blockquote class="blockquote text-center"><h2>Редактирование груза</h2></blockquote>
+            <form action="#" th:action="@{/save}" th:object="${goods}" method="post">
+                <table class="table text-left">
+                    <tr>
+                        <td>ID груза:</td>
+                        <td><input type="text" th:field="*{id}" readonly="readonly" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td>Название:</td>
+                        <td><input type="text" th:field="*{name}" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td>Содержимое:</td>
+                        <td><input type="text" th:field="*{content}" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td>Город отправки:</td>
+                        <td><input type="text" th:field="*{dep_city}" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td>Дата отправки:</td>
+                        <td><input type="date" name="dep_date" value="${goods.dep_date}" required th:field="*{dep_date}" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td>Город получения:</td>
+                        <td><input type="text" th:field="*{arr_city}" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td>Дата получения:</td>
+                        <td><input type="date" name="arr_date" value="${goods.arr_date}" required th:field="*{arr_date}" class="form-control"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="text-center">
+                            <button type="submit" class="btn btn-primary">Отправить</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 </html>
