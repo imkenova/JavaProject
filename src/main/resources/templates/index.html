@@ -9,7 +9,17 @@
     <!-- Добавление пользовательских стилей для отступа навигационной панели -->
     <style>
         nav.navbar {
-            padding-left: 15px; /* Установите нужное значение */
+            padding-left: 15px;
+        }
+        /* Стиль для кнопки "Поиск" */
+        .search-button {
+            margin-left: 10px; /* Отступ слева */
+        }
+
+        /* Скругление края поисковой строки */
+        input#keyword {
+            border-top-right-radius: 10px; /* Скругление верхнего правого угла */
+            border-bottom-right-radius: 10px; /* Скругление нижнего правого угла */
         }
     </style>
 </head>
@@ -38,7 +48,7 @@
                     <input type="text" name="keyword" id="keyword" class="form-control"
                            placeholder="Введите ключевое слово" th:value="${keyword}" required>
                     <div class="input-group-append">
-                        <button class="btn btn-success" type="submit">Поиск</button>
+                        <button class="btn btn-success search-button" type="submit">Поиск</button>
                         <button class="btn btn-warning" type="button" id="btnClear" onclick="clearSearch()">Очистить</button>
                     </div>
                 </div>
