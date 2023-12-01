@@ -1,25 +1,34 @@
 let reverse = 0
 let order_name = ['Сначала старые', 'Сначала новые']
+let rows = []
 
-function sortRows() {
-    let table = document.getElementById('1')
-    let tBody = table.querySelector('tbody')
-    let rows_list = tBody.querySelectorAll('tr')
-    let rows = Array.prototype.slice.call(rows_list, 0)
-    console.log(rows)
-    rows.sort(function(a, b) {
-        a_date = new Date(Array.prototype.slice.call(a.childNodes, 0).at(-4).innerHTML)
-        b_date = new Date(Array.prototype.slice.call(b.childNodes, 0).at(-4).innerHTML)
-        return a_date - b_date
-    })
-    if (reverse) rows = rows.reverse()
-    console.log(reverse)
+
+function applyDateSmth() {
+    let tBody = document.getElementById('1').querySelector('tbody')
+    if (rows.length == 0) rows = Array.prototype.slice.call(tBody.querySelectorAll('tr'), 0)
+    let start = document.getElementById('start').value
+    let end = document.getElementById('end').value
+    let dates = rows.map((row) =>
+        new Date(Array.prototype.slice.call(row.childNodes, 0).at(-4).innerHTML))
+    let merge = dates.map((date, i) => [date, rows[i]])
+    merge.sort(function(a, b) {return a[0] - b[0]})
+    if (reverse) merge = merge.reverse()
+    let mask = new Array(rows.length).fill(1)
+    for (let i = 0; i < dates.length; i++) {
+        if (start != '') {
+            if (merge[i][0].getTime() < new Date(start).getTime()) mask[i] = 0
+        }
+        if (end != '') {
+            if (merge[i][0].getTime() > new Date(end).getTime()) mask[i] = 0
+        }
+    }
     tBody.innerHTML = ''
     for (let i = 0; i < rows.length; i++) {
-    tBody.appendChild(rows[i])
+        if (mask[i] == 1) tBody.appendChild(merge[i][1])
     }
 }
-document.getElementById('apply').addEventListener('click', sortRows)
+
+document.getElementById('apply').addEventListener('click', applyDateSmth)
 
 function changeOrder() {
     reverse = (reverse+1)%2
