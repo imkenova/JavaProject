@@ -2,6 +2,7 @@ let reverse = 0
 let order_name = ['Сначала старые', 'Сначала новые']
 let rows = []
 
+
 function applyDateSmth() {
     let tBody = document.getElementById('1').querySelector('tbody')
     if (rows.length == 0) rows = Array.prototype.slice.call(tBody.querySelectorAll('tr'), 0)
