@@ -55,7 +55,23 @@
             </form>
         </div>
     </div>
-
+    <div style="display: flex">
+        <h4>Дата поставки: </h4>
+        <input type="date" name="Начало" id="start"/>
+        <a style="margin-top: auto; margin-bottom: auto"> - </a>
+        <input type="date" name="Конец" id="end"/>
+        <h4>Сортировка: </h4>
+        <button id="order">Сначала старые</button>
+        <button id="apply">Применить</button>
+    </div>
+    <blockquote class="blockquote text-center">
+        <a href="/new">
+            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false"
+                    autocomplete="off">
+                Добавить груз
+            </button>
+        </a>
+    </blockquote>
     <table class="table table-striped table-hover mt-3">
         <thead>
         <tr>
@@ -91,15 +107,6 @@
     </table>
 
     <p class="text-white">Количество грузов в таблице: <span th:text="${listGoods.size()}"></span></p>
-
-    <blockquote class="blockquote text-center">
-        <a href="/new">
-            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false"
-                    autocomplete="off">
-                Добавить груз
-            </button>
-        </a>
-    </blockquote>
 </div>
 
 <!-- Подключение Bootstrap JavaScript (после закрывающего тега </body>) -->
