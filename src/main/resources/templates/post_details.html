@@ -17,7 +17,7 @@
 <header>
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="border-bottom: 2px solid #3c3a41; background-color: #1f1f1f; height: 56px">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/" style="color: white; font-weight: bold; "->Инвестор.ру</a>
+      <a class="navbar-brand" href="/blog" style="color: white; font-weight: bold; "->Инвестор.ру</a>
       <div class="collapse navbar-collapse" id = "navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item" style="margin-top: 5%">
@@ -34,14 +34,15 @@
 
 </header>
 
-<div class="container mt-5" style="margin-left: 7%">
-  <div th:each="el:${post}">
-    <h2 th:text="${el.title}"/>
-    <p th:text="${el.date_post}"/>
-    <p th:text="${el.content}"/>
+<div class ="row" style="margin-top: 4%">
+  <div class="col-md-8 col-12 mx-md-auto mb-3 pb-2 mx-3">
+    <div th:each="el:${post}">
+    <h2 th:text="${el.title}"/><br/>
+    <p th:text="'Дата публикации: '+ ${el.date_post}"/><hr>
+    <p th:text="${el.content}"/><br/>
     <a th:href="'/blog/'+${el.id}+'/edit'" class="btn btn-secondary">Редактировать</a>
     <a th:href="'/blog/'+${el.id}+'/remove'" class="btn btn-secondary">Удалить</a>
-
+    </div>
   </div>
 </div>
 
