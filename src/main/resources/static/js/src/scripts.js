@@ -1,5 +1,4 @@
 let reverse = 0
-let order_name = ['Сначала старые', 'Сначала новые']
 let rows = []
 
 function changeView() {
@@ -77,13 +76,21 @@ function applyDateSmth() {
         if (mask[i] == 1) tBody.appendChild(merge[i][1])
     }
     changeView()
+    updateAmount()
 }
+
+function updateAmount() {
+    let tBody = document.getElementById('1').querySelector('tbody')
+    let rows_amount = Array.prototype.slice.call(tBody.querySelectorAll('tr'), 0)
+    document.getElementById('amount').innerHTML = '' + rows_amount.length
+}
+
+window.onload = updateAmount
 
 document.getElementById('apply').addEventListener('click', applyDateSmth)
 
 function changeOrder() {
     reverse = (reverse+1)%2
-    document.getElementById('order').innerHTML = order_name[reverse]
+
 }
-document.getElementById('order').addEventListener('click', changeOrder)
 
