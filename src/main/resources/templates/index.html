@@ -92,8 +92,8 @@
             <th scope="col">Содержимое</th>
             <th scope="col">Город отправки</th>
             <th scope="col">Дата отправки</th>
-            <th scope="col">Город получения</th>
-            <th scope="col">Дата получения</th>
+            <th scope="col">Город поставки</th>
+            <th scope="col">Дата поставки</th>
             <th scope="col">Действия</th>
         </tr>
         </thead>
@@ -104,8 +104,8 @@
             <td th:text="${goods.content}">Содержимое груза отсутствует</td>
             <td th:text="${goods.dep_city}">Город отправки отсутствует</td>
             <td th:text="${goods.dep_date}">Дата отправки отсутствует</td>
-            <td th:text="${goods.arr_city}">Город получения отсутствует</td>
-            <td th:text="${goods.arr_date}">Дата получения отсутствует</td>
+            <td th:text="${goods.arr_city}">Город поставки отсутствует</td>
+            <td th:text="${goods.arr_date}">Дата поставки отсутствует</td>
             <td>
                 <a th:href="@{'/edit/'+${goods.id}}">
                     <button type="button" class="btn btn-info">Редактировать</button>
