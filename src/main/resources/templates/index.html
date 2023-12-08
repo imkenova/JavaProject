@@ -32,6 +32,9 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/blog">Инвестиционный блог</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/new">Добавить груз</a> <!-- Ссылка на страницу "Добавить груз" -->
+                </li>
             </ul>
         </div>
     </div>
@@ -56,33 +59,30 @@
         </div>
     </div>
 
-    <blockquote class="blockquote text-center">
-        <a href="/new">
-            <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false"
-                    autocomplete="off">
-                Добавить груз
-            </button>
-        </a>
-    </blockquote>
-
-    <div style="display: flex">
-        <h4>Дата поставки: </h4>
+    <div style="display: flex; margin-bottom: 10px;">
+        <h4 style="margin-right: 10px;">Дата поставки: </h4>
         <input type="date" name="Начало" id="start"/>
-        <a style="margin-top: auto; margin-bottom: auto"> - </a>
+        <a style="margin-top: auto; margin-bottom: auto; margin-left: 10px;"> - </a>
         <input type="date" name="Конец" id="end"/>
-        <h4>Сортировка: </h4>
+    </div>
+    <div style="display: flex; align-items: center;">
+        <h4 style="margin-right: 10px;">Сортировка: </h4>
         <select name="order" id="order" onchange="changeOrder()">
             <option value="new">Сначала старые</option>
             <option value="old">Сначала новые</option>
         </select>
-        <button id="apply">Применить</button>
+        <button id="apply" class="btn btn-secondary" style="margin-left: 35px;">Применить</button>
+        <!-- Добавлены классы Bootstrap и цвет серый -->
     </div>
+
+
+
     <div style="display: flex">
-    <h4>Вид: </h4>
-    <select name="view" id="view" onchange="changeView()">
-        <option value="table">Таблица</option>
-        <option value="chart">Гистограмма</option>
-    </select>
+        <h4 style="margin-right: 10px;">Вид: </h4>
+        <select name="view" id="view" onchange="changeView()" class="ml-2">
+            <option value="table">Таблица</option>
+            <option value="chart">Гистограмма</option>
+        </select>
     </div>
     <table id = "1" class="table table-striped table-hover mt-3">
         <thead>
@@ -92,8 +92,8 @@
             <th scope="col">Содержимое</th>
             <th scope="col">Город отправки</th>
             <th scope="col">Дата отправки</th>
-            <th scope="col">Город получения</th>
-            <th scope="col">Дата получения</th>
+            <th scope="col">Город поставки</th>
+            <th scope="col">Дата поставки</th>
             <th scope="col">Действия</th>
         </tr>
         </thead>
@@ -104,8 +104,8 @@
             <td th:text="${goods.content}">Содержимое груза отсутствует</td>
             <td th:text="${goods.dep_city}">Город отправки отсутствует</td>
             <td th:text="${goods.dep_date}">Дата отправки отсутствует</td>
-            <td th:text="${goods.arr_city}">Город получения отсутствует</td>
-            <td th:text="${goods.arr_date}">Дата получения отсутствует</td>
+            <td th:text="${goods.arr_city}">Город поставки отсутствует</td>
+            <td th:text="${goods.arr_date}">Дата поставки отсутствует</td>
             <td>
                 <a th:href="@{'/edit/'+${goods.id}}">
                     <button type="button" class="btn btn-info">Редактировать</button>
