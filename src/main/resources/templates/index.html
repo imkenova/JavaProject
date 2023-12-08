@@ -55,15 +55,7 @@
             </form>
         </div>
     </div>
-     <div style="display: flex">
-        <h4>Дата поставки: </h4>
-        <input type="date" name="Начало" id="start"/>
-        <a style="margin-top: auto; margin-bottom: auto"> - </a>
-        <input type="date" name="Конец" id="end"/>
-        <h4>Сортировка: </h4>
-        <button id="order">Сначала старые</button>
-        <button id="apply">Применить</button>
-    </div>
+
     <blockquote class="blockquote text-center">
         <a href="/new">
             <button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false"
@@ -72,6 +64,26 @@
             </button>
         </a>
     </blockquote>
+
+    <div style="display: flex">
+        <h4>Дата поставки: </h4>
+        <input type="date" name="Начало" id="start"/>
+        <a style="margin-top: auto; margin-bottom: auto"> - </a>
+        <input type="date" name="Конец" id="end"/>
+        <h4>Сортировка: </h4>
+        <select name="order" id="order" onchange="changeOrder()">
+            <option value="new">Сначала старые</option>
+            <option value="old">Сначала новые</option>
+        </select>
+        <button id="apply">Применить</button>
+    </div>
+    <div style="display: flex">
+    <h4>Вид: </h4>
+    <select name="view" id="view" onchange="changeView()">
+        <option value="table">Таблица</option>
+        <option value="chart">Гистограмма</option>
+    </select>
+    </div>
     <table id = "1" class="table table-striped table-hover mt-3">
         <thead>
         <tr>
@@ -105,8 +117,10 @@
         </tr>
         </tbody>
     </table>
+    <canvas width="1600" height="500" id="canvas" style="display: none; width: 100%; height: 100%"></canvas>
 
-    <p class="text-white">Количество грузов в таблице: <span th:text="${listGoods.size()}"></span></p>
+    <p style="margin-top: 2%" id="quantity" class="text-black">
+        Количество грузов в таблице: <span id="amount"></span></p>
 </div>
 
 <!-- Подключение Bootstrap JavaScript (после закрывающего тега </body>) -->
