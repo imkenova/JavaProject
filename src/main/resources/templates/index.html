@@ -59,24 +59,30 @@
         </div>
     </div>
 
-    <div style="display: flex">
-        <h4>Дата поставки: </h4>
+    <div style="display: flex; margin-bottom: 10px;">
+        <h4 style="margin-right: 10px;">Дата поставки: </h4>
         <input type="date" name="Начало" id="start"/>
-        <a style="margin-top: auto; margin-bottom: auto"> - </a>
+        <a style="margin-top: auto; margin-bottom: auto; margin-left: 10px;"> - </a>
         <input type="date" name="Конец" id="end"/>
-        <h4>Сортировка: </h4>
+    </div>
+    <div style="display: flex; align-items: center;">
+        <h4 style="margin-right: 10px;">Сортировка: </h4>
         <select name="order" id="order" onchange="changeOrder()">
             <option value="new">Сначала старые</option>
             <option value="old">Сначала новые</option>
         </select>
-        <button id="apply">Применить</button>
+        <button id="apply" class="btn btn-secondary" style="margin-left: 35px;">Применить</button>
+        <!-- Добавлены классы Bootstrap и цвет серый -->
     </div>
+
+
+
     <div style="display: flex">
-    <h4>Вид: </h4>
-    <select name="view" id="view" onchange="changeView()">
-        <option value="table">Таблица</option>
-        <option value="chart">Гистограмма</option>
-    </select>
+        <h4 style="margin-right: 10px;">Вид: </h4>
+        <select name="view" id="view" onchange="changeView()" class="ml-2">
+            <option value="table">Таблица</option>
+            <option value="chart">Гистограмма</option>
+        </select>
     </div>
     <table id = "1" class="table table-striped table-hover mt-3">
         <thead>
