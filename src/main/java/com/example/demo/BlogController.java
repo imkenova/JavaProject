@@ -26,7 +26,6 @@ public class BlogController {
     public String blogMain(Model model) {
         Iterable<Post> posts = service.listAll();
         for (Post post:posts) {
-            int index = 0;
             int spaces = 0;
             for (int i = 0; i < post.getContent().length(); i++) {
                 if (post.getContent().charAt(i) == ' ') spaces ++;
