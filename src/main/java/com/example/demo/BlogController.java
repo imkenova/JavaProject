@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.Optional;
 
+import java.lang.Math;
+
 
 @Controller
 public class BlogController {
@@ -23,6 +25,17 @@ public class BlogController {
     @RequestMapping ("/blog")
     public String blogMain(Model model) {
         Iterable<Post> posts = service.listAll();
+        for (Post post:posts) {
+            int index = 0;
+            int spaces = 0;
+            for (int i = 0; i < post.getContent().length(); i++) {
+                if (post.getContent().charAt(i) == ' ') spaces ++;
+                if (spaces >= 30) {
+                    post.setContent(post.getContent().substring(0, i) + " ...");
+                    break;
+                }
+            }
+        }
         model.addAttribute("posts", posts);
         return "blog-main";
     }

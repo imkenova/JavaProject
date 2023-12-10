@@ -24,7 +24,7 @@
             <a class="nav-link" href="/" style="color: white;">Система с грузами</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/blog/new">Новый пост</a>
+            <a class="nav-link" href="/blog/new">Добавить пост</a>
           </li>
         </ul>
       </div>
@@ -40,9 +40,12 @@
     <div th:each="el:${post}">
     <h2 th:text="${el.title}"/><br/>
     <p th:text="'Дата публикации: '+ ${el.date_post}"/><hr>
-    <p th:text="${el.content}"/><br/>
+    <p><pre th:utext="${el.content}" style="overflow-x: auto; white-space: pre-line;
+            word-wrap: break-word; text-align: justify; font-family: var(--bs-font-sans-serif);
+            font-size: 1rem; font-weight: 400; line-height: 1.5;"></pre></p>
     <a th:href="'/blog/'+${el.id}+'/edit'" class="btn btn-secondary">Редактировать</a>
     <a th:href="'/blog/'+${el.id}+'/remove'" class="btn btn-secondary">Удалить</a>
+    <a th:href="'/blog'" class="btn btn-secondary" style="float: right">Назад</a>
     </div>
   </div>
 </div>
