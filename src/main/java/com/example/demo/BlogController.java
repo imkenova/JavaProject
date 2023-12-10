@@ -29,7 +29,7 @@ public class BlogController {
             int spaces = 0;
             for (int i = 0; i < post.getContent().length(); i++) {
                 if (post.getContent().charAt(i) == ' ') spaces ++;
-                if (spaces >= 30) {
+                if (spaces == 30) {
                     post.setContent(post.getContent().substring(0, i) + " ...");
                     break;
                 }
