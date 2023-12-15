@@ -15,7 +15,7 @@
     background: radial-gradient(circle, rgba(230,207,217,1) 0%, rgba(179,172,193,1) 0%, rgba(148,187,233,1) 100%);">
 
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="border-bottom: 2px solid #3c3a41; background-color: #1f1f1f; height: 56px">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="padding-left: 15px">
     <div class="container-fluid">
       <a class="navbar-brand" href="/blog" style="color: white; font-weight: bold;">Главная</a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -38,14 +38,14 @@
 <div class ="row" style="margin-top: 4%">
   <div class="col-md-8 col-12 mx-md-auto mb-3 pb-2 mx-3">
     <div th:each="el:${post}">
-    <h2 th:text="${el.title}"/><br/>
-    <p th:text="'Дата публикации: '+ ${el.date_post}"/><hr>
-    <p><pre th:utext="${el.content}" style="overflow-x: auto; white-space: pre-line;
+      <h2 th:text="${el.title}"/><br/>
+      <p th:text="'Дата публикации: '+ ${el.date_post}"/><hr>
+      <p><pre th:utext="${el.content}" style="overflow-x: auto; white-space: pre-line;
             word-wrap: break-word; text-align: justify; font-family: var(--bs-font-sans-serif);
             font-size: 1rem; font-weight: 400; line-height: 1.5;"></pre></p>
-    <a th:href="'/blog/'+${el.id}+'/edit'" class="btn btn-secondary">Редактировать</a>
-    <a th:href="'/blog/'+${el.id}+'/remove'" class="btn btn-secondary">Удалить</a>
-    <a th:href="'/blog'" class="btn btn-secondary" style="float: right">Назад</a>
+      <a th:href="'/blog/'+${el.id}+'/edit'" class="btn btn-secondary">Редактировать</a>
+      <a th:href="'/blog/'+${el.id}+'/remove'" id="btnDelete" class="btn btn-secondary">Удалить</a>
+      <a th:href="'/blog'" class="btn btn-secondary" style="float: right">Назад</a>
     </div>
   </div>
 </div>
