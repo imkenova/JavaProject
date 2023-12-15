@@ -42,11 +42,11 @@
 
 
 <div class="container mt-4">
-    <h1 class="display-4" style="margin-top: 65px">Грузы</h1>
+    <h1 class="display-4" style="margin-top: 75px">Грузы</h1>
 
     <div class="row">
-        <div class="col-md-8">
-            <h4>Поиск груза по любому критерию:</h4>
+        <div class="col-md-8" style="margin-top: 10px">
+            <h5>Поиск груза по любому критерию:</h5>
             <form th:action="@{/}">
                 <div class="input-group mb-3">
                     <input type="text" name="keyword" id="keyword" class="form-control"
@@ -60,14 +60,14 @@
         </div>
     </div>
 
-    <div style="display: flex; margin-bottom: 10px;">
-        <h4 style="margin-right: 10px;">Дата поставки: </h4>
+    <div style="display: flex; margin-bottom: 10px; margin-top: 10px">
+        <h5 style="margin-right: 10px;">Дата поставки: </h5>
         <input type="date" name="Начало" id="start" style="text-align: center;"/>
         <a style="margin-top: auto; margin-bottom: auto; margin-left: 10px;"> </a>
         <input type="date" name="Конец" id="end" style="text-align: center;"/>
     </div>
     <div style="display: flex; align-items: center;">
-        <h4 style="margin-right: 10px;">Сортировка: </h4>
+        <h5 style="margin-right: 10px;">Сортировка: </h5>
         <select name="order" id="order" onchange="changeOrder()">
             <option value="new">Сначала старые</option>
             <option value="old">Сначала новые</option>
@@ -79,7 +79,7 @@
 
 
     <div style="display: flex">
-        <h4 style="margin-right: 10px;">Вид: </h4>
+        <h5 style="margin-right: 10px;">Вид: </h5>
         <select name="view" id="view" onchange="changeView()" class="ml-2" style="height: 22px; margin-top: 8px">
             <option value="table">Таблица</option>
             <option value="chart">Гистограмма</option>
