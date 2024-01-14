@@ -35,12 +35,32 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/new">Добавить груз</a> <!-- Ссылка на страницу "Добавить груз" -->
                 </li>
+                <div th:if="${username}">
+                    <li class="btn-group mr-2" aria-label="Second group">
+                        <p style="color: white">Добро пожаловать, <span th:text="${username}"></span>!</p>
+                    </li>
+                    <li class="btn-group mr-2" aria-label="Second group">
+                        <a type="button" class="btn btn-primary"  style="color: white;" href="/logout">Выйти</a>
+                    </li>
+                </div>
+                <div th:unless="${username}">
+                <li class="btn-group mr-2" aria-label="Second group">
+                    <a type="button" class="btn btn-primary"  style="color: white;" href="/register">Регистрация</a>
+                </li>
+                <li class="btn-group mr-2"  aria-label="Second group">
+                    <a type="button" class="btn btn-primary" style="color: white; margin-left: 10%" href="/login">Вход</a>
+                </li>
+                </div>
+                <div th:if="${admin}">
+                    <li class="btn-group mr-2" aria-label="Second group">
+                        <a class="nav-link" style="color: white" href="/users">Список зарегистрированных пользователей</a>
+                    </li>
+                </div>
+
             </ul>
         </div>
     </div>
 </nav>
-
-
 <div class="container mt-4">
     <h1 class="display-4" style="margin-top: 65px">Грузы</h1>
 
