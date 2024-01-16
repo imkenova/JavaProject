@@ -4,15 +4,18 @@ import jakarta.jws.soap.SOAPBinding;
 import jakarta.validation.Valid;
 import com.example.demo.UserDto;
 import com.example.demo.User;
+import com.example.demo.Role;
 import com.example.demo.UserService;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Array;
+import java.security.Principal;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,12 +23,14 @@ import java.util.stream.Collectors;
 public class AuthController {
 
     private UserService userService;
-
+    private UserRepository userRepository;
     private RoleRepository roleRepository;
 
-    public AuthController(UserService userService, RoleRepository roleRepository) {
+    public AuthController(UserService userService, RoleRepository roleRepository, UserRepository userRepository) {
 
         this.roleRepository = roleRepository;
+
+        this.userRepository = userRepository;
 
         this.userService = userService;
     }
@@ -67,7 +72,7 @@ public class AuthController {
     }
 
     @GetMapping("/users")
-    public String users(Model model){
+    public String users(Model model, Principal principal){
         List<UserDto> users = userService.findAllUsers();
         for (UserDto user:users
              ) {
@@ -75,11 +80,25 @@ public class AuthController {
                     .map((role) -> new SimpleGrantedAuthority(role.getName()))
                     .collect(Collectors.toList());
         }
+        if (principal != null && principal.getName() != null) {
+            User user = userService.findUserByEmail(principal.getName());
+            model.addAttribute("username", user.getName());
+        }
         model.addAttribute("users", users);
         model.addAttribute("roles", roleRepository.findAll());
         return "users";
     }
 
+    @PostMapping("/users/{id}/role")
+    public String changeUserRole(@PathVariable("id") Long id, @RequestParam("role") String role)
+    {
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));;
+        Role newRole = roleRepository.findByName(role);
+        user.getRoles().clear();
+        user.getRoles().add(newRole);
+        userRepository.save(user);
+        return "redirect:/users";
+    }
     @GetMapping("/login")
     public String login(){
         return "login";

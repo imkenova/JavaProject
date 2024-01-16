@@ -25,7 +25,13 @@
                     <a class="nav-link" href="/new">Добавить груз</a> <!-- Ссылка на страницу "Добавить груз" -->
                 </li>
                 <li class="btn-group mr-2" aria-label="Second group">
+                    <p style="color: white">Добро пожаловать, <span th:text="${username}"></span>!</p>
+                </li>
+                <li class="btn-group mr-2" aria-label="Second group">
                     <a type="button" class="btn btn-primary"  style="color: white;" href="/logout">Выйти</a>
+                </li>
+                <li class="btn-group mr-2" aria-label="Second group">
+                    <a class="nav-link" style="color: white" href="/users">Список зарегистрированных пользователей</a>
                 </li>
             </ul>
         </div>
@@ -50,9 +56,12 @@
             <td th:text="${user.lastName}"></td>
             <td th:text="${user.email}"></td>
             <td>
-                <select id="selectID">
-                    <option th:each="role : ${roles}" th:text="${role.name}"  th:selected="(${role.id} == *{user.roles})"></option>
+                <form th:action="@{/users/{id}/role(id=${user.id})}" method="post">
+                <select name="role">
+                    <option th:each="role : ${roles}" th:text="${role.name}"  th:selected="(${role.name} == ${user.roles[0].name})" th:value="${role.name}"></option>
                 </select>
+                <button type="submit">Изменить</button>
+                </form>
             </td>
         </tr>
         </tbody>
