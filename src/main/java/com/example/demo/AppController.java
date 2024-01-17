@@ -56,17 +56,31 @@ public class AppController {
     }
 
     @RequestMapping("/edit/{id}")
-    public ModelAndView showEditGoodsForm(@PathVariable(name = "id") Long id) {
-        ModelAndView mav = new ModelAndView("edit_goods");
+    public ModelAndView showEditGoodsForm(@PathVariable(name = "id") Long id, SecurityContextHolderAwareRequestWrapper request) {
+        ModelAndView mav = new ModelAndView();
         Goods goods = service.get(id);
         mav.addObject("goods", goods);
+        if (!request.isUserInRole("ROLE_ADMIN"))
+        {
+            mav.setViewName("error403");
+        }
+        else {
+            mav.setViewName("edit_goods");
+        }
         return mav;
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteGoods(@PathVariable(name = "id") Long id) {
-        service.delete(id);
-        return "redirect:/";
+    public String deleteGoods(@PathVariable(name = "id") Long id , SecurityContextHolderAwareRequestWrapper request) {
+        if (!request.isUserInRole("ROLE_ADMIN"))
+        {
+            return "error403";
+        }
+        else {
+            service.delete(id);
+            return "redirect:/";
+        }
+
     }
 
 }

@@ -100,7 +100,7 @@ public class AuthController {
         return "redirect:/users";
     }
     @GetMapping("/login")
-    public String login(){
+    public String login(Model model){
         return "login";
     }
 }

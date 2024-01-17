@@ -32,7 +32,7 @@ public class SpringSecurity {
         http
                 .authorizeHttpRequests((authorize) ->
                         authorize
-                                .requestMatchers("/register/**","/", "/new", "/save", "/edit/{id}", "/delete/{id}", "/blog", "/blog/new", "/blog/{id}/edit", "/blog/{id}/remove", "/blog/{id}", "/blog/save").permitAll()
+                                .requestMatchers("/register/**","/", "/new", "/save",  "/blog", "/blog/new", "/blog/{id}", "/blog/save","/users", "/blog/{id}/edit", "/blog/{id}/remove", "/edit/{id}", "/delete/{id}").permitAll()
                                 .requestMatchers("/users").hasRole("ADMIN")
                                 .requestMatchers("/users/**").hasRole("ADMIN")
 
