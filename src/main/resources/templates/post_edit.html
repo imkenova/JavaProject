@@ -38,7 +38,7 @@
 <h2>Редактировать пост</h2>
 
 <form action="#" th:action="@{/blog/save}" th:object="${post}" method="post">
-  <input type="text" th:field="*{id}" name="id" readonly="readonly" class="form-control" style="width: 65%;margin-top: 2%">
+  <input type="text" th:field="*{id}" name="id" readonly="readonly" class="form-control" style="width: 65%;margin-top: 2%; display: none;" >
   <input type="text" th:field="*{title}" name="title" placeholder="Название поста" class="form-control" style="width: 65%; margin-top: 1%">
   <input type="date" th:field="*{date_post}" name="date_post" placeholder="Дата публикации" class="form-control" style="width: 65%;margin-top: 1%">
   <textarea type="text" th:field="*{content}" name="content" placeholder="Текст поста" class="form-control" style="width: 65%; height: 200px;margin-top: 1%"/>
