@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -66,17 +67,30 @@ public class BlogController {
     }
 
     @RequestMapping("/blog/{id}/edit")
-    public ModelAndView showEditPostForm(@PathVariable(name = "id") Long id) {
-        ModelAndView mav = new ModelAndView("post_edit");
+    public ModelAndView showEditPostForm(@PathVariable(name = "id") Long id , SecurityContextHolderAwareRequestWrapper request) {
+        ModelAndView mav = new ModelAndView();
+        if (!request.isUserInRole("ROLE_ADMIN"))
+        {
+            mav.setViewName("error403");
+        }
+        else {
+            mav.setViewName("post_edit");
+        }
         Post post = service.get(id);
         mav.addObject("post", post);
         return mav;
     }
 
     @RequestMapping("/blog/{id}/remove")
-    public String deletePost(@PathVariable(name = "id") Long id) {
-        service.delete(id);
-        return "redirect:/blog";
+    public String deletePost(@PathVariable(name = "id") Long id , SecurityContextHolderAwareRequestWrapper request) {
+        if (!request.isUserInRole("ROLE_ADMIN"))
+        {
+            return "error403";
+        }
+        else {
+            service.delete(id);
+            return "redirect:/blog";
+        }
     }
 
 
