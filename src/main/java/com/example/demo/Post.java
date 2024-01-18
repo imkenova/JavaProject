@@ -1,6 +1,8 @@
 package com.example.demo;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 public class Post {
@@ -12,6 +14,9 @@ public class Post {
 
     private String content;
 
+    @Getter
+    @Setter
+    private Long user_id;
     public Post() {
 
     }

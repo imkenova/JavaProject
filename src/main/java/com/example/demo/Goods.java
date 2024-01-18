@@ -1,6 +1,8 @@
 package com.example.demo;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @Entity
@@ -13,6 +15,9 @@ public class Goods {
     private String arr_city;
     private String arr_date;
 
+    @Getter
+    @Setter
+    private Long user_id;
     protected Goods() {
 
     }
