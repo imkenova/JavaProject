@@ -27,10 +27,30 @@
           <li class="nav-item">
             <a class="nav-link" href="/" style="color: white;">Система с грузами</a>
           </li>
+          <div th:if="${username}">
           <li class="nav-item">
             <a class="nav-link" href="/blog/new">Добавить пост</a>
           </li>
+          </div>
         </ul>
+      </div>
+      <div th:if="${username}">
+        <div class="btn-group mr-2" aria-label="First group" style="margin-left: 120px">
+          <div style="color: white; ">
+            <span th:text="${username}"></span>
+          </div>
+        </div>
+        <div class="btn-group mr-2" aria-label="Second group" style="margin-left: 15px">
+          <a type="button" class="btn btn-primary" style="color: white;" href="/logout">Выйти</a>
+        </div>
+      </div>
+      <div th:unless="${username}">
+        <li class="btn-group mr-2" aria-label="Second group">
+          <a type="button" class="btn btn-primary" style="color: white; margin-left: 80px" href="/register">Регистрация</a>
+        </li>
+        <li class="btn-group mr-2" aria-label="Second group">
+          <a type="button" class="btn btn-primary" style="color: white; margin-left: 10%" href="/login">Вход</a>
+        </li>
       </div>
     </div>
   </nav>

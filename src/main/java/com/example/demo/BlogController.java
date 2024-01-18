@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 
 import java.lang.Math;
@@ -22,10 +24,17 @@ public class BlogController {
 
     @Autowired
     private PostRepository repo;
-
+    private UserService userService;
+    public BlogController(UserService userService) {
+        this.userService = userService;
+    }
     @RequestMapping ("/blog")
-    public String blogMain(Model model) {
+    public String blogMain(Model model, Principal principal) {
         Iterable<Post> posts = service.listAll();
+        if (principal != null && principal.getName() != null) {
+            User user = userService.findUserByEmail(principal.getName());
+            model.addAttribute("username", user.getName());
+        }
         for (Post post:posts) {
             int spaces = 0;
             for (int i = 0; i < post.getContent().length(); i++) {
@@ -48,7 +57,9 @@ public class BlogController {
     }
 
     @RequestMapping(value = "/blog/save", method = RequestMethod.POST)
-    public String savePost(@ModelAttribute("post") Post post) {
+    public String savePost(@ModelAttribute("post") Post post, Principal principal) {
+        User user = userService.findUserByEmail(principal.getName());
+        post.setUser_id(user.getId());
         service.save(post);
         return "redirect:/blog";
     }
@@ -67,29 +78,31 @@ public class BlogController {
     }
 
     @RequestMapping("/blog/{id}/edit")
-    public ModelAndView showEditPostForm(@PathVariable(name = "id") Long id , SecurityContextHolderAwareRequestWrapper request) {
+    public ModelAndView showEditPostForm(@PathVariable(name = "id") Long id , SecurityContextHolderAwareRequestWrapper request, Principal principal) {
         ModelAndView mav = new ModelAndView();
-        if (!request.isUserInRole("ROLE_ADMIN"))
+        Post post = service.get(id);
+        User user = userService.findUserByEmail(principal.getName());
+        if (request.isUserInRole("ROLE_ADMIN") || Objects.equals(user.getId(), post.getUser_id()))
         {
-            mav.setViewName("error403");
-        }
-        else {
             mav.setViewName("post_edit");
         }
-        Post post = service.get(id);
+        else {
+            mav.setViewName("error403");
+        }
         mav.addObject("post", post);
         return mav;
     }
 
     @RequestMapping("/blog/{id}/remove")
-    public String deletePost(@PathVariable(name = "id") Long id , SecurityContextHolderAwareRequestWrapper request) {
-        if (!request.isUserInRole("ROLE_ADMIN"))
+    public String deletePost(@PathVariable(name = "id") Long id , SecurityContextHolderAwareRequestWrapper request, Principal principal) {
+        User user = userService.findUserByEmail(principal.getName());
+        if (request.isUserInRole("ROLE_ADMIN") || Objects.equals(user.getId(), service.get(id).getUser_id()))
         {
-            return "error403";
-        }
-        else {
             service.delete(id);
             return "redirect:/blog";
+        }
+        else {
+            return "error403";
         }
     }
 

@@ -2,6 +2,7 @@ package com.example.demo;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
 
 import com.example.demo.User;
 import com.example.demo.UserService;
@@ -50,35 +51,39 @@ public class AppController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveGoods(@ModelAttribute("goods") Goods goods) {
+    public String saveGoods(@ModelAttribute("goods") Goods goods, Principal principal) {
+        User user = userService.findUserByEmail(principal.getName());
+        goods.setUser_id(user.getId());
         service.save(goods);
         return "redirect:/";
     }
 
     @RequestMapping("/edit/{id}")
-    public ModelAndView showEditGoodsForm(@PathVariable(name = "id") Long id, SecurityContextHolderAwareRequestWrapper request) {
+    public ModelAndView showEditGoodsForm(@PathVariable(name = "id") Long id, SecurityContextHolderAwareRequestWrapper request, Principal principal) {
         ModelAndView mav = new ModelAndView();
         Goods goods = service.get(id);
         mav.addObject("goods", goods);
-        if (!request.isUserInRole("ROLE_ADMIN"))
+        User user = userService.findUserByEmail(principal.getName());
+        if (request.isUserInRole("ROLE_ADMIN") || Objects.equals(user.getId(), goods.getUser_id()))
         {
-            mav.setViewName("error403");
+            mav.setViewName("edit_goods");
         }
         else {
-            mav.setViewName("edit_goods");
+            mav.setViewName("error403");
         }
         return mav;
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteGoods(@PathVariable(name = "id") Long id , SecurityContextHolderAwareRequestWrapper request) {
-        if (!request.isUserInRole("ROLE_ADMIN"))
+    public String deleteGoods(@PathVariable(name = "id") Long id , SecurityContextHolderAwareRequestWrapper request, Principal principal) {
+        User user = userService.findUserByEmail(principal.getName());
+        if (request.isUserInRole("ROLE_ADMIN") || Objects.equals(user.getId(), service.get(id).getUser_id()))
         {
-            return "error403";
-        }
-        else {
             service.delete(id);
             return "redirect:/";
+        }
+        else {
+            return "error403";
         }
 
     }
